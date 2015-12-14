@@ -1,0 +1,156 @@
+SQL tutorial code notes
+Working example
+"SELECT alarms.*, sites.site_name, clusters.cluster_name
+	 FROM alarms
+	 JOIN sites
+	 ON sites.id = alarms.site_id
+	 JOIN clusters
+	 ON sites.cluster_id = clusters.id
+	 WHERE DATE(alarms.created_at) >= date(01/01/2015)"
+å
+
+
+* Basicåç
+	SELECT * FROM DBname.Table  # Selects all entries from specific table
+Example:
+	SELECT [ALL | DISTINCT] column1[,column2] FROM table1[,table2] [WHERE "conditions"] [GROUP BY "column-list"] [HAVING "conditions] [ORDER BY "column-list" [ASC | DESC] ] 
+
+ Example:
+	SELECT name, age, salary
+	FROM employee
+	WHERE age > 40;
+
+* CREATE
+Example:
+	create table "tablename"
+	("column1" "data type",
+ 	"column2" "data type",åå
+	 "column3" "data type");
+
+* UPDATE
+Examples:
+	update phone_book
+	set area_code = 623
+	where prefix = 979;
+
+	update phone_book
+  	set last_name = 'Smith', prefix=555, suffix=9292
+  	where last_name = 'Jones';
+
+	update employee
+  	set age = age+1
+  	where first_name='Mary' and last_name='Williams';
+
+* INSERT
+Example:
+	insert into employee
+	(first, last, age, address, city, state)
+	values ('Luke', 'Duke', 45, '2130 Boars Nest', 'Hazard Co', 'Georgia');
+
+* LIKE - "%" can be used as a wild card to match any possible character that might appear before or after the characters specified
+
+	SELECT name, title, dept FROM employee WHERE title LIKE 'Pro%'; 
+
+* DELETE - if you leave off the where clause, all records will be deleted!
+Example:
+	delete from employee
+  	where lastname = 'May';
+
+	delete from employee
+  	where firstname = 'Mike' or firstname = 'Eric';	
+
+* DROP TABLE -  only if you mean it!
+Example:
+	drop table "tablename"
+
+* DISTINCT - DISTINCT will discard the duplicate records for the columns you specified after the "SELECT" statement: For example:
+
+	SELECT DISTINCT age 
+	FROM employee_info;
+
+** Aggregate Functions
+
+MIN 	returns the smallest value in a given column
+MAX 	returns the largest value in a given column
+SUM 	returns the sum of the numeric values in a given column
+AVG 	returns the average value of a given column
+COUNT 	returns the total number of values in a given column
+COUNT(*) 	returns the number of rows in a table
+
+Example:
+	SELECT AVG(salary)
+	FROM employee
+	WHERE title = 'Programmer';
+
+* GROUP BY - gather all of the rows together that contain data in the specified column(s) and will allow aggregate functions to be performed on the one or more columns
+Example:
+	SELECT max(salary), dept
+	FROM employee 
+	GROUP BY dept;
+
+* HAVING - allows you to specify conditions on the rows for each group - in other words, which rows should be selected will be based on the conditions you specify
+Example:
+	SELECT dept, avg(salary)
+	FROM employee
+	GROUP BY dept
+	HAVING avg(salary) > 20000;
+
+* ORDER BY (optional) - allows you to display the results of your query in a sorted order (either ascending order or descending order) based on the columns that you specify to order by
+	- ASC = Ascending Order - default
+	- DESC = Descending Order 
+Example:
+	SELECT employee_id, dept, name, age, salary
+	FROM employee_info
+	WHERE dept = 'Sales'
+	ORDER BY salary, age DESC;
+
+* AND/OR - used to join two or more conditions in the WHERE clause
+Example:
+	SELECT employeeid, firstname, lastname, title, salary
+	FROM employee_info
+	WHERE (salary >= 45000.00) AND (title = 'Programmer');  #() optional
+
+* IN/BETWEEN - IN: Checks for items in list Between: Checks within a range
+Example (IN):
+	SELECT employeeid, lastname, salary
+	FROM employee_info
+	WHERE lastname IN ('Hernandez', 'Jones', 'Roberts', 'Ruiz');
+Example (BETWEEN):
+	SELECT employeeid, age, lastname, salary
+	FROM employee_info
+	WHERE age BETWEEN 30 AND 40;
+
+* Mathematical Functions
+	+ 	addition
+	- 	subtraction
+	* 	multiplication
+	/ 	division
+	% 	modulo
+	ABS(x) 	returns the absolute value of x
+	SIGN(x) 	returns the sign of input x as -1, 0, or 1 (negative, zero, or positive respectively)
+	MOD(x,y) 	modulo - returns the integer remainder of x divided by y (same as x%y)
+	FLOOR(x) 	returns the largest integer value that is less than or equal to x
+	CEILING(x) or CEIL(x) 	returns the smallest integer value that is greater than or equal to x
+	POWER(x,y) 	returns the value of x raised to the power of y
+	ROUND(x) 	returns the value of x rounded to the nearest whole integer
+	ROUND(x,d) 	returns the value of x rounded to the number of decimal places specified by the value d
+	SQRT(x) 	returns the square-root value of x
+
+* JOIN - makes relational database systems "relational"
+Example:
+	SELECT customer_info.firstname, customer_info.lastname, purchases.item
+	FROM customer_info, purchases
+	WHERE customer_info.customer_number = purchases.customer_number;
+-"Inner Join" or "Equijoin"
+
+Example2:
+	SELECT customer_info.firstname, customer_info.lastname, purchases.item
+	FROM customer_info INNER JOIN purchases
+	ON customer_info.customer_number = purchases.customer_number;
+
+Inner Join vs. Outer Join vs. Left Join vs. Right Join
+An inner join on 'TableA' returns information about only those products that are common in both tables. (Think intersection of a venn diagram)
+In a left join, all rows are included in the result set with a NULL in the 'TableA' columns. The other rows in the result are the same as the inner join. (All of VD1 including the intersection in venn diagram)
+In a right join, it is identical to left, except all rows from 'TableB' is kept with the intersection of rows from 'TableA'
+
+
