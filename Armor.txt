@@ -7,4 +7,5 @@ Armor
     - Pull-up Pouch Vest        $275        12+Dex           -                  -               Special         2 lbs
     - Undercover Vest           $350        13+Dex           -                  -               18              3 lbs
 
-    Medium Armor       
+    Medium Armor  
+         
