@@ -1,6 +1,10 @@
 Armor
-    Light Armor         Cost        AC          Strength Req.       Stealth         Perception DC      Weight
-    - Heavy Coat        $40         11+Dex           -              Disadvantage        -               6 lbs
-    - Leather Jacket    $90         11+Dex           -                  -               -               4 lbs
-    - Kevlar-lined Coat $150        12+Dex           -              Disadvantage        -               6 lbs
-           
+    Light Armor                 Cost        AC          Strength Req.       Stealth         Perception DC      Weight
+    - Heavy Coat                $40         11+Dex           -              Disadvantage        -               6 lbs
+    - Leather Jacket            $90         11+Dex           -                  -               -               4 lbs
+    - Kevlar-lined Coat         $150        12+Dex           -              Disadvantage        -               6 lbs
+    - Light Undercover Shirt    $200        11+Dex           -                  -               22              2 lbs
+    - Pull-up Pouch Vest        $275        12+Dex           -                  -               Special         2 lbs
+    - Undercover Vest           $350        13+Dex           -                  -               18              3 lbs
+
+    Medium Armor       
